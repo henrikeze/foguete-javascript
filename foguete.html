@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Contagem Regressiva</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+    }
+    .container {
+      display: flex;
+      flex-direction: row;
+    }
+    .container-contagem {
+      width: 50%;
+      height:  100vh;
+      background: orange;
+      justify-content: center;
+      display: flex;
+      align-items: center;
+      flex-direction: column; 
+    }
+    .container-foguete {
+      display: flex;
+      justify-content: center;
+      widows: 50%;
+    }
+    h1 {
+      margin-bottom: 20px;
+    }
+    input {
+      height: 34px;
+    }
+    button {
+      margin-top: 10px;
+      padding: 10px;
+    }
+
+    #container-foguete {
+      display: flex;
+      justify-content: center;
+      width: 50%;
+    }
+    #container-foguete img{
+      width: 100px;
+      height: 100px;
+      position: absolute;
+      top: 400px;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="container">
+    <div class="container-contagem">
+      <h1>Contagem Regressiva</h1>
+      <input type="text" id="input">
+      <button type="button" id="button" onclick="contar()">Iniciar contagem</button>
+      <h4 id="contagem"></h4>
+    </div>
+    <div id="container-foguete">
+      <img src="https://res-1.cloudinary.com/mp-assets/image/upload/c_pad,f_auto,q_auto,w_550/v1528127568/i-scream/content/images/0/0003742_rocket-night-light.png"
+        id="foguete" alt="foguete">
+    </div>
+  </div>
+
+  <script>
+    function contar() {
+      document.getElementById('button').innerText = 'Contagem iniciada';
+      event.target.disabled = true;
+      valor = parseInt(document.getElementById("input").value);
+      contador = document.getElementById("contagem");
+
+      for(let i = -1; i <= valor; i++){
+        setTimeout(function (){
+         contador.innerHTML = (valor-i);
+        }, i*1000);
+      }
+      setTimeout(() => {
+        lancarFoguete();
+      }, valor*1000);
+    }
+
+    var alturaFoguete = 400;
+    var foguete = document.getElementById('foguete');
+
+    function lancarFoguete() {
+      setTimeout(function () {
+        if (alturaFoguete > 0) {
+          alturaFoguete = alturaFoguete - 50;
+          foguete.style.top = alturaFoguete + 'px';
+          lancarFoguete();
+        } else if(alturaFoguete == 0) {
+          alert("Foguete em órbita!");
+        }
+        return alturaFoguete;
+      }, 500);
+    }
+ 
+  </script>
+</body>
+
+</html>
